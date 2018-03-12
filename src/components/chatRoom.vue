@@ -34,11 +34,14 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="userNameForm" action="#">
+                        
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="e.g :Terry" aria-label="e.g :Terry" aria-describedby="basic-addon2" v-model="userName" v-on:keyup.enter="toggleUsernameModal" required >
+                                <input type="text" class="form-control" placeholder="e.g :Terry" aria-label="e.g :Terry" aria-describedby="basic-addon2" v-model="userName" v-on:keyup.enter="toggleUsernameModal" v-bind:class="{ 'is-invalid': userNameIsEmpty }" >
+                                <div class="invalid-feedback" v-show="userNameIsEmpty">
+                                    請輸入姓名
+                                </div>
                             </div>
-                        </form>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" v-on:click="toggleUsernameModal">Close</button>
@@ -72,6 +75,7 @@ export default {
   data() {
     return {
       userName: "",
+      userNameIsEmpty: false,
       sendMessageInfo: "",
       messages: []
     };
@@ -82,16 +86,17 @@ export default {
         msgRef.push({
           userName: this.userName,
           message: this.sendMessageInfo,
-          timeStamp: moment().format('LT')
+          timeStamp: moment().format("LT")
         });
         this.sendMessageInfo = "";
       }
     },
     toggleUsernameModal() {
       if (this.userName && this.userName.length > 0) {
+        this.userNameIsEmpty = false;
         $("#setUserNameModal").modal("toggle");
       } else {
-        $("#userNameForm").submit();
+        this.userNameIsEmpty = true;
       }
     }
   },
