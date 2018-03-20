@@ -106,6 +106,7 @@ export default {
       backdrop: "static"
     });
     $("#setUserNameModal").modal("show");
+    console.log('test');
     const vm = this;
     msgRef.on("value", function(snapshot) {
       vm.messages = snapshot.val();
