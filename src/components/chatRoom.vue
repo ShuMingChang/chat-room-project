@@ -106,7 +106,7 @@ export default {
       backdrop: "static"
     });
     $("#setUserNameModal").modal("show");
-    console.log('test');
+    console.log('feature/fix timer cross day bug');
     const vm = this;
     msgRef.on("value", function(snapshot) {
       vm.messages = snapshot.val();
